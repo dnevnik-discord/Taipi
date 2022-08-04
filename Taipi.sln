@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dramatist", "Dramatist\Dramatist.csproj", "{5BD19CA8-000A-48B8-A939-692A349F12DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taipi", "Taipi\Taipi.csproj", "{A4119CCD-50FF-4359-B6F1-334AE6993DB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DramatistTest", "DramatistTest\DramatistTest.csproj", "{5E6541DB-525C-4C62-9255-416F27C77E7B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BD19CA8-000A-48B8-A939-692A349F12DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BD19CA8-000A-48B8-A939-692A349F12DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BD19CA8-000A-48B8-A939-692A349F12DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BD19CA8-000A-48B8-A939-692A349F12DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
