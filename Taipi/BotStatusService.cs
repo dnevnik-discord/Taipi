@@ -16,6 +16,6 @@ public class BotStatusService : DiscordClientService
         await Client.WaitForReadyAsync(stoppingToken);
         Logger.LogInformation("Client is ready!");
 
-        await Client.SetActivityAsync(new Game("Set my status!"));
+        await Client.SetActivityAsync(new Game(name: "bewbs", ActivityType.Watching, flags: ActivityProperties.Join, details: "custom"));
     }
 }

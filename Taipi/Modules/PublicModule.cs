@@ -1,7 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 
-namespace Sample.Simple.Modules;
+namespace Taipi.Modules;
 
 public class PublicModule : ModuleBase<SocketCommandContext>
 {

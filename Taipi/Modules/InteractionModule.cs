@@ -1,6 +1,6 @@
 ﻿using Discord.Interactions;
 
-namespace Sample.Simple.Modules;
+namespace Taipi.Modules;
 
 public class InteractionModule : InteractionModuleBase<SocketInteractionContext>
 {

@@ -11,7 +11,7 @@ var host = Host.CreateDefaultBuilder()
     {
         config.SocketConfig = new DiscordSocketConfig
         {
-            LogLevel = LogSeverity.Verbose,
+            LogLevel = LogSeverity.Debug,
             AlwaysDownloadUsers = true,
             MessageCacheSize = 200
         };
@@ -23,19 +23,24 @@ var host = Host.CreateDefaultBuilder()
     {
         config.DefaultRunMode = RunMode.Async;
         config.CaseSensitiveCommands = false;
+        config.LogLevel = LogSeverity.Debug;
     })
     // Optionally wire up the interactions service
     .UseInteractionService((context, config) =>
     {
-        config.LogLevel = LogSeverity.Info;
+        config.LogLevel = LogSeverity.Debug;
         config.UseCompiledLambda = true;
     })
     .ConfigureServices((context, services) =>
     {
         //Add any other services here
-        services.AddHostedService<CommandHandler>();
-        services.AddHostedService<BotStatusService>();
-        services.AddHostedService<LongRunningService>();
+        services
+            .AddHostedService<CommandHandler>()
+            .AddHostedService<InteractionHandler>()
+            .AddHostedService<BotStatusService>()
+            .AddHostedService<LongRunningService>();
+
+
     }).Build();
   
 await host.RunAsync();
