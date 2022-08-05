@@ -19,7 +19,7 @@ public class LongRunningService : DiscordClientService
         while (!stoppingToken.IsCancellationRequested)
         {
             Logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            await Task.Delay(1000, stoppingToken);
+            await Task.Delay(600000, stoppingToken);
         }
     }
 }
