@@ -1,62 +1,41 @@
-﻿using Discord;
+using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Taipi;
 
-
-namespace Taipi;
-
-class Program
-{
-    static async Task Main()
+// CreateDefaultBuilder configures a lot of stuff for us automatically
+// See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host
+var host = Host.CreateDefaultBuilder()   
+    .ConfigureDiscordHost((context, config) =>
     {
-        var builder = new HostBuilder()
-            .ConfigureAppConfiguration(x =>
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true)
-                    .Build();
-
-                x.AddConfiguration(configuration);
-            })
-            .ConfigureLogging(x =>
-            {
-                x.AddConsole();
-                x.SetMinimumLevel(LogLevel.Debug);
-            })
-            //.ConfigureDiscordHost<DiscordSocketClient>((context, config) =>
-            .ConfigureDiscordHost((context, config) =>
-            {
-                config.SocketConfig = new DiscordSocketConfig
-                {
-                    LogLevel = LogSeverity.Debug,
-                    AlwaysDownloadUsers = false,
-                    MessageCacheSize = 200,
-                };
-
-                config.Token = context.Configuration["Token"];
-            })
-            .UseCommandService((context, config) =>
-            {
-                config.CaseSensitiveCommands = false;
-                config.LogLevel = LogSeverity.Debug;
-                config.DefaultRunMode = RunMode.Sync;
-            })
-            .ConfigureServices((context, services) => 
-            {
-                
-            })
-            .UseConsoleLifetime();
-
-        var host = builder.Build();
-        using (host)
+        config.SocketConfig = new DiscordSocketConfig
         {
-            await host.RunAsync();
-        }
-    }
-}
+            LogLevel = LogSeverity.Verbose,
+            AlwaysDownloadUsers = true,
+            MessageCacheSize = 200
+        };
+
+        config.Token = context.Configuration["Token"];
+    })
+    // Optionally wire up the command service
+    .UseCommandService((context, config) =>
+    {
+        config.DefaultRunMode = RunMode.Async;
+        config.CaseSensitiveCommands = false;
+    })
+    // Optionally wire up the interactions service
+    .UseInteractionService((context, config) =>
+    {
+        config.LogLevel = LogSeverity.Info;
+        config.UseCompiledLambda = true;
+    })
+    .ConfigureServices((context, services) =>
+    {
+        //Add any other services here
+        services.AddHostedService<CommandHandler>();
+        services.AddHostedService<BotStatusService>();
+        services.AddHostedService<LongRunningService>();
+    }).Build();
+  
+await host.RunAsync();
