@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 
 namespace Taipi.Modules;
 
@@ -24,6 +25,7 @@ public class PublicModule : ModuleBase<SocketCommandContext>
     }
 
     [Command("shutdown")]
+    [RequireUserPermission(GuildPermission.Administrator)]
     public Task Stop()
     {
         _ = _host.StopAsync();
@@ -44,6 +46,18 @@ public class PublicModule : ModuleBase<SocketCommandContext>
         _logger.Log(GetLogLevel(LogSeverity.Info), "Information logged from Discord LogSeverity.Info ");
 
         return Task.CompletedTask;
+    }
+
+    [Command("info")]
+    public async Task InfoAsync(SocketGuildUser socketGuildUser = null)
+    {
+        if (socketGuildUser == null)
+            socketGuildUser = Context.User as SocketGuildUser;
+
+        await ReplyAsync($"ID: {socketGuildUser.Id}\n" +
+            $"Name: {socketGuildUser.Username}#{socketGuildUser.Discriminator}\n" +
+            $"Created at: {socketGuildUser.CreatedAt}\n" +
+            $"Status: {socketGuildUser.Status}");
     }
 
     private static LogLevel GetLogLevel(LogSeverity severity)

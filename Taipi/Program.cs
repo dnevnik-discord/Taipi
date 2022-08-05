@@ -4,6 +4,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Taipi.Services;
 
+
 // CreateDefaultBuilder configures a lot of stuff for us automatically
 // See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host
 var host = Host.CreateDefaultBuilder()   
@@ -13,10 +14,12 @@ var host = Host.CreateDefaultBuilder()
         {
             LogLevel = LogSeverity.Debug,
             AlwaysDownloadUsers = true,
-            MessageCacheSize = 200
+            MessageCacheSize = 200,
+            GatewayIntents = GatewayIntents.All
         };
-
+        
         config.Token = context.Configuration["Token"];
+
     })
     // Optionally wire up the command service
     .UseCommandService((context, config) =>
@@ -40,7 +43,7 @@ var host = Host.CreateDefaultBuilder()
             .AddHostedService<BotStatusService>()
             .AddHostedService<LongRunningService>()
             .AddHostedService<Worker>();
-
+    
 
     }).Build();
   
