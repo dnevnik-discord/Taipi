@@ -2,7 +2,7 @@
 using Discord.Addons.Hosting.Util;
 using Discord.WebSocket;
 
-namespace Taipi;
+namespace Taipi.Services;
 
 public class LongRunningService : DiscordClientService
 {

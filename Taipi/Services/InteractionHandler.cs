@@ -5,7 +5,7 @@ using Discord.Addons.Hosting.Util;
 using Discord.Interactions;
 using Discord.WebSocket;
 
-namespace Taipi;
+namespace Taipi.Services;
 
 // NOTE: This command handler is specifically for using InteractionService-based commands
 internal class InteractionHandler : DiscordClientService

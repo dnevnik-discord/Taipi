@@ -2,7 +2,7 @@ using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using Taipi;
+using Taipi.Services;
 
 // CreateDefaultBuilder configures a lot of stuff for us automatically
 // See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host
@@ -38,7 +38,8 @@ var host = Host.CreateDefaultBuilder()
             .AddHostedService<CommandHandler>()
             .AddHostedService<InteractionHandler>()
             .AddHostedService<BotStatusService>()
-            .AddHostedService<LongRunningService>();
+            .AddHostedService<LongRunningService>()
+            .AddHostedService<Worker>();
 
 
     }).Build();

@@ -4,7 +4,7 @@ using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
 
-namespace Taipi;
+namespace Taipi.Services;
 
 public class CommandHandler : DiscordClientService
 {

@@ -3,7 +3,7 @@ using Discord.Addons.Hosting;
 using Discord.Addons.Hosting.Util;
 using Discord.WebSocket;
 
-namespace Taipi;
+namespace Taipi.Services;
 
 public class BotStatusService : DiscordClientService
 {

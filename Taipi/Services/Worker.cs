@@ -1,4 +1,4 @@
-namespace Taipi;
+namespace Taipi.Services;
 
 // Services that do not require access to the Discord Client should use
 // an implementation of BackgroundService.
