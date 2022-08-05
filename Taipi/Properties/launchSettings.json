@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "Sample.Simple": {
+    "Taipi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "environmentVariables": {
