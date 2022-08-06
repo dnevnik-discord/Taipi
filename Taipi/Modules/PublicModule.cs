@@ -1,4 +1,4 @@
-﻿using Discord;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
@@ -35,6 +35,7 @@ public class PublicModule : ModuleBase<SocketCommandContext>
     [Command("log")]
     public Task TestLogs()
     {
+        _logger.LogDebug("НТЖТЯ ТЖАТГУ");
         _logger.LogTrace("This is a trace log");
         _logger.LogDebug("This is a debug log");
         _logger.LogInformation("This is an information log");

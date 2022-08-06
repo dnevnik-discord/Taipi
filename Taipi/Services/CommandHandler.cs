@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;

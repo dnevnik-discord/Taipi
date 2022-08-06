@@ -1,4 +1,4 @@
-﻿namespace Dramatist;
+namespace Dramatist;
 
 public static class SomeName
 {

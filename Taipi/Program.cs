@@ -4,10 +4,13 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Taipi.Services;
 
+// ToDo: FIX ME!
+Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 // CreateDefaultBuilder configures a lot of stuff for us automatically
 // See: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host
-var host = Host.CreateDefaultBuilder()   
+var host = Host.CreateDefaultBuilder()
+    //.ConfigureLogging( (context, builder) => builder.AddConsole())
     .ConfigureDiscordHost((context, config) =>
     {
         config.SocketConfig = new DiscordSocketConfig
@@ -17,7 +20,7 @@ var host = Host.CreateDefaultBuilder()
             MessageCacheSize = 200,
             GatewayIntents = GatewayIntents.All
         };
-        
+
         config.Token = context.Configuration["Token"];
 
     })
@@ -42,9 +45,10 @@ var host = Host.CreateDefaultBuilder()
             .AddHostedService<InteractionHandler>()
             .AddHostedService<BotStatusService>()
             .AddHostedService<LongRunningService>()
-            .AddHostedService<Worker>();
-    
+            //.AddHostedService<Worker>()
+            //.AddHostedService<DnevnikService>()
+            ;
 
     }).Build();
-  
+
 await host.RunAsync();
