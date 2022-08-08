@@ -8,7 +8,6 @@ public class DnevnikService : BackgroundService
 
     private readonly ILogger<DnevnikService> _logger;
 
-
     public DnevnikService(HttpClient httpClient, ILogger<DnevnikService> logger) : base()
     {
         _httpClient = httpClient;
@@ -17,7 +16,7 @@ public class DnevnikService : BackgroundService
 
         _httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
 
-        _httpClient.DefaultRequestHeaders.Add("UserAgent", "Unofficial Dnevnik Discord");
+        _httpClient.DefaultRequestHeaders.Add("User-Agent", "Unofficial Dnevnik Discord");
 
         _logger = logger;
     }
