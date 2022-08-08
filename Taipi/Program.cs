@@ -45,8 +45,15 @@ var host = Host.CreateDefaultBuilder()
             .AddHostedService<InteractionHandler>()
             .AddHostedService<BotStatusService>()
             .AddHostedService<LongRunningService>()
-            //.AddHostedService<Worker>()
-            //.AddHostedService<DnevnikService>()
+            // .AddHostedService<Worker>()
+            .AddHostedService<DnevnikService>()
+            // .AddHttpClient<DnevnikService>(client =>
+            //     {
+            //         client.BaseAddress =new Uri("https://httpbin.org/");
+            //     }
+            // )
+            .AddHttpClient<DnevnikService>()
+
             ;
 
     }).Build();
