@@ -58,7 +58,16 @@ public class PublicModule : ModuleBase<SocketCommandContext>
         await ReplyAsync($"ID: {socketGuildUser.Id}\n" +
             $"Name: {socketGuildUser.Username}#{socketGuildUser.Discriminator}\n" +
             $"Created at: {socketGuildUser.CreatedAt}\n" +
-            $"Status: {socketGuildUser.Status}");
+            $"Joined at: {socketGuildUser.JoinedAt}\n" +
+            $"Status: {socketGuildUser.Status}\n" +
+            $"Active clients: {socketGuildUser.ActiveClients}\n" +
+            $"Activities: {socketGuildUser.Activities}\n" +
+            $"Hash code: {socketGuildUser.GetHashCode()}\n" +
+            $"Guild permissions: {socketGuildUser.GuildPermissions}\n" +
+            $"Hierarchy: {socketGuildUser.Hierarchy}\n" +
+            $"Public flags: {socketGuildUser.PublicFlags}\n" +
+            $"Roles: {socketGuildUser.Roles}\n"
+            );
     }
 
     private static LogLevel GetLogLevel(LogSeverity severity)

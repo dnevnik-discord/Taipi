@@ -1,15 +1,19 @@
+using Discord;
+using Discord.Addons.Hosting;
+using Discord.Addons.Hosting.Util;
+using Discord.WebSocket;
 using HtmlAgilityPack;
 
 namespace Taipi.Services;
 
 
-public class DnevnikService : BackgroundService
+public class DnevnikService : DiscordClientService
 {
     private readonly HttpClient _httpClient;
 
     private readonly ILogger<DnevnikService> _logger;
 
-    public DnevnikService(HttpClient httpClient, ILogger<DnevnikService> logger)
+    public DnevnikService(DiscordSocketClient client, HttpClient httpClient, ILogger<DnevnikService> logger) : base(client, logger)
     {
         _httpClient = httpClient;
 
@@ -26,9 +30,14 @@ public class DnevnikService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        await Client.WaitForReadyAsync(stoppingToken);
+        Logger.LogInformation("Client is ready!");
+        
         while (!stoppingToken.IsCancellationRequested)
         {
             _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
+
+            
 
             var response = await GetDnevnikAsync();
             var doc = new HtmlDocument();
@@ -41,6 +50,8 @@ public class DnevnikService : BackgroundService
 
             _logger.LogInformation(article.GetAttributeValue("title", "").Replace("&quot;", "\""));
             _logger.LogInformation("https://www.dnevnik.bg" + article.GetAttributeValue("href", ""));
+
+            await Client.SetActivityAsync(new Game(name: article.GetAttributeValue("title", "").Replace("&quot;", "\""), ActivityType.Watching, flags: ActivityProperties.Join, details: "custom"));
 
             await Task.Delay(600000, stoppingToken);
         }
