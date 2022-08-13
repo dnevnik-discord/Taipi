@@ -14,7 +14,7 @@ public class Comment
         throw new NotImplementedException();
     }
 
-    Comment(int id, int articleId, int position, int userId, string? contents = null)
+    public Comment(int id, int articleId, int position, int userId, string? contents = null)
     {
         Id = id;
         ArticleId = articleId;
