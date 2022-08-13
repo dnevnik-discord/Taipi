@@ -14,14 +14,21 @@ public class DnevnikService : BackgroundService
     public DnevnikService(ILogger<DnevnikService> logger)
     {
         _logger = logger;
-        _dnevnikClient = new DnevnikClient(new HttpClient());
+        //_dnevnikClient = new DnevnikClient(new HttpClient());
+        HttpClientHandler handler = new HttpClientHandler();
+        //handler.AllowAutoRedirect = false;
+        handler.MaxAutomaticRedirections = 1;
+        _dnevnikClient = new DnevnikClient(new HttpClient(handler));
+        
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         // ToDo: (http)clienr ready?
-
-        await _dnevnikClient.GetArticleUriAsync(4379799);
+        
+        int articleId = 4379799;
+        var uri = await _dnevnikClient.GetArticleUriAsync(articleId);
+        _logger.LogInformation($"Full URI for article id {articleId}: {uri}");
         
         while (!stoppingToken.IsCancellationRequested)
         {
