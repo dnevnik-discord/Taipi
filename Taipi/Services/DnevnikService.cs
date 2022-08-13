@@ -1,45 +1,33 @@
-using Discord;
-using Discord.Addons.Hosting;
-using Discord.Addons.Hosting.Util;
-using Discord.WebSocket;
 using HtmlAgilityPack;
+
+using Dramatist;
+
 
 namespace Taipi.Services;
 
 
-public class DnevnikService : DiscordClientService
+public class DnevnikService : BackgroundService
 {
-    private readonly HttpClient _httpClient;
-
+    private readonly DnevnikClient _dnevnikClient;
     private readonly ILogger<DnevnikService> _logger;
 
-    public DnevnikService(DiscordSocketClient client, HttpClient httpClient, ILogger<DnevnikService> logger) : base(client, logger)
+    public DnevnikService(ILogger<DnevnikService> logger)
     {
-        _httpClient = httpClient;
-
-        _httpClient.BaseAddress = new Uri("https://www.dnevnik.bg");
-
-        _httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
-
-        _httpClient.DefaultRequestHeaders.Add("User-Agent", "Unofficial Dnevnik Discord");
-
         _logger = logger;
+        _dnevnikClient = new DnevnikClient(new HttpClient());
     }
-
-    public async Task<string> GetDnevnikAsync() => await _httpClient.GetStringAsync("/");
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Client.WaitForReadyAsync(stoppingToken);
-        Logger.LogInformation("Client is ready!");
+        // ToDo: (http)clienr ready?
+
+        await _dnevnikClient.GetArticleUriAsync(4379799);
         
         while (!stoppingToken.IsCancellationRequested)
         {
             _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
 
-            
-
-            var response = await GetDnevnikAsync();
+            var response = await _dnevnikClient.GetHomepageAsync();
             var doc = new HtmlDocument();
             doc.LoadHtml(response);
             var article = doc.DocumentNode
@@ -51,7 +39,6 @@ public class DnevnikService : DiscordClientService
             _logger.LogInformation(article.GetAttributeValue("title", "").Replace("&quot;", "\""));
             _logger.LogInformation("https://www.dnevnik.bg" + article.GetAttributeValue("href", ""));
 
-            await Client.SetActivityAsync(new Game(name: article.GetAttributeValue("title", "").Replace("&quot;", "\""), ActivityType.Watching, flags: ActivityProperties.Join, details: "custom"));
 
             await Task.Delay(600000, stoppingToken);
         }
