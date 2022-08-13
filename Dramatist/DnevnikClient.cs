@@ -18,7 +18,7 @@ public class DnevnikClient
     // ToDo: ensure success, try-catch
     public async Task<string> GetHomepageAsync() => await _client.GetStringAsync("/");
 
-    public async Task<string> GetArticleAsync(int id) => await _client.GetStringAsync($"/{id}");
+    public async Task<string> GetArticleAsync(int id) => await _client.GetStringAsync($"{id}");
 
     public async Task<Uri> GetArticleUriAsync(int id)
     {
