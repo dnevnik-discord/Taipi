@@ -22,7 +22,7 @@ public class DnevnikClient
 
     public async Task<Uri> GetArticleUriAsync(int id)
     {
-        var request = new HttpRequestMessage(HttpMethod.Head, $"/{id}");
+        var request = new HttpRequestMessage(HttpMethod.Head, $"{id}");
         var response = await _client.SendAsync(request);
         // foreach (var header in response.Headers)
         // {
