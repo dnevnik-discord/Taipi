@@ -39,10 +39,11 @@ var host = Host.CreateDefaultBuilder()
             .AddHostedService<CommandHandler>()
             .AddHostedService<InteractionHandler>()
             .AddHostedService<BotStatusService>()
-            .AddHostedService<LongRunningService>()
-            .AddHostedService<Worker>()
+            //.AddHostedService<LongRunningService>()
+            //.AddHostedService<Worker>()
             .AddHostedService<DnevnikService>()
-            .AddHttpClient<DnevnikService>();
+            .AddHttpClient<DnevnikService>()
+            ;
 
     }).Build();
 

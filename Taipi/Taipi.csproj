@@ -22,4 +22,10 @@
     <ProjectReference Include="..\Dramatist\Dramatist.csproj" />
   </ItemGroup>
 
+  <!-- <ItemGroup>
+    <None Update="config.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup> -->
+
 </Project>
