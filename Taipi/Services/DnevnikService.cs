@@ -21,6 +21,9 @@ public class DnevnikService : BackgroundService
     {
         // ToDo: (http)clienr ready?
 
+        var httpbin = await _dnevnikClient.GetHttpbinTest("get");
+        _logger.LogInformation(httpbin);
+
         int articleId = 4379799;
         // ToDo: try-catch, status checks in DnevnikClient
         try
@@ -37,27 +40,11 @@ public class DnevnikService : BackgroundService
         {
             _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
 
-            try
-            {
-                var response = await _dnevnikClient.GetHomepageAsync();
-                var doc = new HtmlDocument();
-                doc.LoadHtml(response);
-                var article = doc.DocumentNode
-                    .SelectNodes("/html/body/div[3]/main/div/div[1]/div/div[1]/div/div[1]/article/h3/a")
-                    .First()
-                    // .Attributes["href"].Value
-                    ;
-
-                _logger.LogInformation(article.GetAttributeValue("title", "").Replace("&quot;", "\""));
-                _logger.LogInformation("https://www.dnevnik.bg" + article.GetAttributeValue("href", ""));
-            }
-            catch (System.Exception)
-            {
-                //throw;
-            }
+            var frontPage = await _dnevnikClient.GetFrontPageAsync();
+            _logger.LogInformation(frontPage);
 
 
-            await Task.Delay(600000, stoppingToken);
+            await Task.Delay(300000, stoppingToken);
         }
     }
 }

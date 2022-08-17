@@ -4,31 +4,34 @@ namespace Dramatist.Models;
 public class Article
 {
     // ToDo: Id and DnevnikId?
-    private int _id;
-    private Uri _shortUri;
-    private Uri _fullUri;
-    private string _title;
-
-    public int Id { get => _id; }
-    public Uri ShortUri { get => _shortUri; }
-    public Uri FullUri { get => _fullUri; }
-    public string Title { get => _title; }
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public Uri Uri { get; set; }
+    public Uri ?ShortUri { get; set; } = null;
+    public ArticleType ?ArticleType { get; set; }
 
     // ToDo: not really
-    public Article()
+    public Article(Uri uri)
     {
         throw new NotImplementedException();
     }
 
-    public Article(int id)
+    public Article(string title, Uri uri, ArticleType? articleType = null)
     {
-        _id = id;
-        _shortUri = new Uri("https://www.dnevnik.bg/" + id);
-        _fullUri = GetArticleFullUri();
-        _title = GetArticleTitle();
+        Title = title;
+        Uri = uri;
+        ArticleType = articleType;
     }
 
-    private Uri GetArticleFullUri()
+    public Article(int id)
+    {
+        Id = id;
+        Title = GetArticleTitle();
+        Uri = GetArticleUri(id);
+        ShortUri = new Uri("https://www.dnevnik.bg/" + id);
+    }
+
+    private Uri GetArticleUri(int id)
     {
         // from _shortUri
         throw new NotImplementedException();
@@ -41,6 +44,12 @@ public class Article
     }
 
     public List<Comment> GetComments()
+    {
+        throw new NotImplementedException();
+    }
+
+    // from Article.Uri
+    private string GetId()
     {
         throw new NotImplementedException();
     }

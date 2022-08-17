@@ -22,11 +22,11 @@ public enum AvatarType
 
 public static class Dnevnik
 {
-    // ToDo: Why? How should be done?
+    // ToDo: Why? How should it be done?
     // public const Uri DnevnikBase = (Uri)"https://www.dnevnik.bg";
     public const string BaseAddress = "https://www.dnevnik.bg";
     public const string KnetworkBaseAddress = "https://knetwork.capital.bg";
-    public const string IdCapitalBaseAddress = "https://id.capital.bg";
+    public const string IdBaseAddress = "https://id.capital.bg";
 
     public const string CapitalBaseAddress = "https://www.capital.bg";
 
