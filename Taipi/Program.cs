@@ -2,6 +2,7 @@ using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
 using Taipi.Services;
 
 // ToDo: FIX ME!
@@ -38,10 +39,35 @@ var host = Host.CreateDefaultBuilder()
         services
             .AddHostedService<CommandHandler>()
             .AddHostedService<InteractionHandler>()
-            .AddHostedService<BotStatusService>()
             .AddHostedService<TaipiService>()
             .AddHostedService<DnevnikService>()
             .AddHttpClient<DnevnikService>()
+                // .ConfigurePrimaryHttpMessageHandler(() =>
+                // {
+                //     return new HttpClientHandler
+                //     {
+                //         //AllowAutoRedirect = false,
+                //         MaxAutomaticRedirections = 0
+                //         // ,UseDefaultCredentials = true
+                //     };
+                // })
+            // .ConfigureHttpClient((sp, httpClient) =>
+            // {
+            //     //var options = sp.GetRequiredService<IOptions<SomeOptions>>().Value;
+            //     //httpClient.BaseAddress = options.Url;
+            //     //httpClient.Timeout = options.RequestTimeout;
+            // })
+            // //.SetHandlerLifetime(TimeSpan.FromMinutes(5))
+            // // ToDo: SocketsHttpHandler
+            // .ConfigurePrimaryHttpMessageHandler(x => new SocketsHttpHandler()
+            // {
+            //     //MaxAutomaticRedirections = 1;
+            //     AllowAutoRedirect = false
+
+            // })
+            //.AddHttpMessageHandler(sp => sp.GetService<SomeCustomHandler>().CreateAuthHandler())
+            // // .AddPolicyHandlerFromRegistry(PollyPolicyName.HttpRetry)
+            // // .AddPolicyHandlerFromRegistry(PollyPolicyName.HttpCircuitBreaker);
             ;
 
     }).Build();

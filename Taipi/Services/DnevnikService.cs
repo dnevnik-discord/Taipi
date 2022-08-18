@@ -1,7 +1,4 @@
-using HtmlAgilityPack;
-
 using Dramatist;
-
 
 namespace Taipi.Services;
 
@@ -13,16 +10,19 @@ public class DnevnikService : BackgroundService
 
     public DnevnikService(HttpClient httpClient, ILogger<DnevnikService> logger)
     {
-        _logger = logger;
+        httpClient.DefaultRequestHeaders.UserAgent.Clear();
+        httpClient.DefaultRequestHeaders
+            .TryAddWithoutValidation("User-Agent", "Unofficial Dnevnik Discord");
+
         _dnevnikClient = new DnevnikClient(httpClient);
+        
+        _logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // ToDo: (http)clienr ready?
-
-        var httpbin = await _dnevnikClient.GetHttpbinTest("get");
-        _logger.LogInformation(httpbin);
+        var get = await _dnevnikClient.GetHttpbinTest("get");
+        _logger.LogInformation(get);
 
         int articleId = 4379799;
         // ToDo: try-catch, status checks in DnevnikClient
@@ -38,12 +38,10 @@ public class DnevnikService : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
-
             var frontPage = await _dnevnikClient.GetFrontPageAsync();
             _logger.LogInformation(frontPage);
 
-
+            _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
             await Task.Delay(300000, stoppingToken);
         }
     }

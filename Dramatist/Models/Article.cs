@@ -48,6 +48,11 @@ public class Article
         throw new NotImplementedException();
     }
 
+    public override string ToString()
+    {
+        return $"Title: {Title} | Uri: {Uri}";
+    }
+
     // from Article.Uri
     private string GetId()
     {

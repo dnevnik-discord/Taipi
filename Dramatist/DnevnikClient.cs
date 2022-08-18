@@ -10,6 +10,8 @@ public class DnevnikClient
 {
     private readonly HttpClient _client;
 
+    // public string UserAgent;
+
     public DnevnikClient(HttpClient client)
     {
         // ToDo: How to disable redirects here?
@@ -17,20 +19,7 @@ public class DnevnikClient
         // handler.MaxAutomaticRedirections = 1;
         _client = client;
         _client.BaseAddress = new Uri(Dnevnik.BaseAddress);
-        _client.DefaultRequestHeaders.Accept.Clear();
-        //_client.DefaultRequestHeaders.Add("Accept", "*/*");
-        _client.DefaultRequestHeaders.Accept.Add(
-            (new MediaTypeWithQualityHeaderValue("*/*"))
-        );
-        _client.DefaultRequestHeaders.UserAgent.Clear();
-        //_client.DefaultRequestHeaders.Add("User-Agent", "Unofficial Dnevnik Discord");
-        // _client.DefaultRequestHeaders.UserAgent.Add(
-        //     (ProductInfoHeaderValue.Parse("Unofficial Dnevnik Discord"))
-        // );
-        _client.DefaultRequestHeaders.TryAddWithoutValidation(
-            "User-Agent", 
-            "Unofficial Dnevnik Discord"
-        );
+        _client.DefaultRequestHeaders.Add("Accept", "*/*");
     }
 
     // ToDo: ensure success, try-catch
@@ -52,8 +41,8 @@ public class DnevnikClient
             node.GetAttributeValue("title", "").Replace("&quot;", "\""),
             new Uri("https://www.dnevnik.bg" + node.GetAttributeValue("href", ""))
         );
-
-        return $"{article.Title}: {article.Uri}";
+        
+        return article.ToString();
     }
 
     public async Task<string> GetArticleAsync(int id) =>
@@ -62,7 +51,11 @@ public class DnevnikClient
     public async Task<Uri> GetArticleUriAsync(int id)
     {
         // ToDo: How to disable redirects here?
-        var request = new HttpRequestMessage(HttpMethod.Head, $"{id}");
+        // ToDo: HttpRequestMessage : IDisposable? using? HttpResponseMessage.Dispose()?
+        // var request = new HttpRequestMessage(HttpMethod.Head, $"{id}");
+        // var response = await _client.SendAsync(request);
+        // request.Dispose();
+        var request = new HttpRequestMessage(HttpMethod.Head, $"{id}/");
         var response = await _client.SendAsync(request);
         return response.Headers.Location;
     }
