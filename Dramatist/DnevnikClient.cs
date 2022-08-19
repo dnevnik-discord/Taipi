@@ -35,6 +35,8 @@ public class DnevnikClient
 
         var articles = new List<Article>();
         // ToDo: NullObject pattern, NullArticle
+        // ToDo: return an empty list and handle the error in the caller?
+        // ToDo: this should actually return ALL article types
         if (nodes == null)
             articles.Add(new Article("NULL", new Uri(Dnevnik.BaseAddress)));
         else
