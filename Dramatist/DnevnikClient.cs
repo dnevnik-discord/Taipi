@@ -25,6 +25,7 @@ public class DnevnikClient
 
     public async Task<List<Article>> GetFrontPageArticlesAsync(ArticleType articleType)
     {
+        //   System.Net.Http.HttpRequestException: Response status code does not indicate success: 503 (Service Unavailabl
         var response = await _client.GetStringAsync("/");
         var doc = new HtmlDocument();
         doc.LoadHtml(response);
