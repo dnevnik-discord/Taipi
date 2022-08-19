@@ -28,7 +28,7 @@ public class DnevnikService : BackgroundService
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            var articles = await _dnevnikClient.GetFrontPageArticlesAsync(ArticleType.Important);
+            var articles = await _dnevnikClient.GetFrontPageArticlesAsync(ArticleType.New);
             foreach (var article in articles)
             {
                 _logger.LogInformation(article.ToString());
