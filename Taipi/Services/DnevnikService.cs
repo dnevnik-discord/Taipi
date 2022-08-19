@@ -10,6 +10,8 @@ public class DnevnikService : BackgroundService
 
     public DnevnikService(HttpClient httpClient, ILogger<DnevnikService> logger)
     {
+        httpClient.DefaultRequestHeaders.Accept.Clear();
+        httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
         httpClient.DefaultRequestHeaders.UserAgent.Clear();
         httpClient.DefaultRequestHeaders
             .TryAddWithoutValidation("User-Agent", "Unofficial Dnevnik Discord");
@@ -21,25 +23,19 @@ public class DnevnikService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var get = await _dnevnikClient.GetHttpbinTest("get");
-        _logger.LogInformation(get);
-
-        int articleId = 4379799;
-        // ToDo: try-catch, status checks in DnevnikClient
-        try
-        {
-            var uri = await _dnevnikClient.GetArticleUriAsync(articleId);
-            _logger.LogInformation($"Full URI for article id {articleId}: {uri}");
-        }
-        catch (System.Exception)
-        {
-            //throw;
-        }
+        // var get = await _dnevnikClient.GetHttpbinTest("get");
+        // _logger.LogInformation(get);
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            var frontPage = await _dnevnikClient.GetFrontPageAsync();
-            _logger.LogInformation(frontPage);
+            // var frontPage = await _dnevnikClient.GetFrontPageAsync();
+            // _logger.LogInformation(frontPage);
+
+            var articles = await _dnevnikClient.GetFrontPageArticles(ArticleType.Lead);
+            foreach (var article in articles)
+            {
+                _logger.LogInformation(article.ToString());
+            }
 
             _logger.LogInformation("DnevnikService running at: {time}", DateTimeOffset.Now);
             await Task.Delay(300000, stoppingToken);

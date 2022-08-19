@@ -34,17 +34,17 @@ public static class Dnevnik
     {
         switch (t)
         {
-            case ArticleType.Lead:
-                return "/html/body/div[3]/main/div/div[1]/div/div[1]/div/div[1]/article/h3/a";
             // ToDo: FIX ME!
+            case ArticleType.Lead:
+                return "//article[@class='primary-article-v1']/h3/a";
             case ArticleType.SubLead:
-                return "/html/body/div[3]/main/div/div[1]/div/div[1]/div/div[1]/div[2]/ul/li";
+                return "//div/div[1]/div/div[1]/div[2]/ul/li/article/h3/a";
             case ArticleType.Important:
-                return "/html/body/div[3]/main/div/div[1]/div/div[1]/div/div[1]/div[4]/div/div";
+                return "//div/div[1]/div/div[1]/div[position()=3 or position()=4]/div/div[position()=1 or position()=2]/article/h3/a";
             case ArticleType.New:
-                return "";
+                return "//div[@class='list-of-latest-stories']/article[@class='secondary-article']/h3/a";
             case ArticleType.Analysis:
-                return "";
+                return "//div/div[2]/div/div[1]/div/div[2]/h3/a";
             // ToDo: drop default?
             default:
                 throw new Exception("Invalid article type!");

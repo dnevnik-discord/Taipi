@@ -7,7 +7,6 @@ public class Article
     public int Id { get; set; }
     public string Title { get; set; }
     public Uri Uri { get; set; }
-    public Uri ?ShortUri { get; set; } = null;
     public ArticleType ?ArticleType { get; set; }
 
     // ToDo: not really
@@ -23,20 +22,6 @@ public class Article
         ArticleType = articleType;
     }
 
-    public Article(int id)
-    {
-        Id = id;
-        Title = GetArticleTitle();
-        Uri = GetArticleUri(id);
-        ShortUri = new Uri("https://www.dnevnik.bg/" + id);
-    }
-
-    private Uri GetArticleUri(int id)
-    {
-        // from _shortUri
-        throw new NotImplementedException();
-    }
-
     // ToDo: by FullUri only?
     private string GetArticleTitle()
     {
@@ -50,7 +35,7 @@ public class Article
 
     public override string ToString()
     {
-        return $"Title: {Title} | Uri: {Uri}";
+        return $"Type: {ArticleType} | Title: {Title} | Uri: {Uri}";
     }
 
     // from Article.Uri
