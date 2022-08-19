@@ -5,8 +5,8 @@ namespace Taipi.Services;
 
 public class DnevnikService : BackgroundService
 {
-    private readonly ILogger<DnevnikService> _logger;
     private readonly DnevnikClient _dnevnikClient;
+    private readonly ILogger<DnevnikService> _logger;
 
     public DnevnikService(HttpClient httpClient, ILogger<DnevnikService> logger)
     {
@@ -14,7 +14,7 @@ public class DnevnikService : BackgroundService
         httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
         httpClient.DefaultRequestHeaders.UserAgent.Clear();
         httpClient.DefaultRequestHeaders
-            .TryAddWithoutValidation("User-Agent", "Unofficial Dnevnik Discord");
+            .TryAddWithoutValidation("User-Agent", "Unofficial Dnevnik Discord; https://discord.gg/DYw5UNqksB");
 
         _dnevnikClient = new DnevnikClient(httpClient);
         
@@ -23,15 +23,12 @@ public class DnevnikService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // var get = await _dnevnikClient.GetHttpbinTest("get");
-        // _logger.LogInformation(get);
+        var get = await _dnevnikClient.GetHttpbinAsync("get");
+        _logger.LogInformation(get);
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            // var frontPage = await _dnevnikClient.GetFrontPageAsync();
-            // _logger.LogInformation(frontPage);
-
-            var articles = await _dnevnikClient.GetFrontPageArticles(ArticleType.Lead);
+            var articles = await _dnevnikClient.GetFrontPageArticlesAsync(ArticleType.Important);
             foreach (var article in articles)
             {
                 _logger.LogInformation(article.ToString());
