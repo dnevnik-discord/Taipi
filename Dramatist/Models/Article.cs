@@ -1,6 +1,5 @@
 namespace Dramatist.Models;
 
-
 public class Article
 {
     // ToDo: Id and DnevnikId?
@@ -10,6 +9,16 @@ public class Article
     // ToDo: 
     // public ArticleType ?ArticleType { get; set; }
     public ArticleType? ArticleType { get; set; }
+
+    public Article()
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Article(int id)
+    {
+        throw new NotImplementedException();
+    }
 
     public Article(Uri uri)
     {
