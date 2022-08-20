@@ -7,7 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dramatist", "Dramatist\Dram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Taipi", "Taipi\Taipi.csproj", "{A4119CCD-50FF-4359-B6F1-334AE6993DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DramatistTest", "DramatistTest\DramatistTest.csproj", "{5E6541DB-525C-4C62-9255-416F27C77E7B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8CCE6C22-0D23-4E1D-9F9A-10E96257B5EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DramatistTest", "Tests\DramatistTest\DramatistTest.csproj", "{10F88EE1-C3B3-40A6-AEA1-72750D040365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +28,12 @@ Global
 		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4119CCD-50FF-4359-B6F1-334AE6993DB7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E6541DB-525C-4C62-9255-416F27C77E7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F88EE1-C3B3-40A6-AEA1-72750D040365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F88EE1-C3B3-40A6-AEA1-72750D040365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F88EE1-C3B3-40A6-AEA1-72750D040365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F88EE1-C3B3-40A6-AEA1-72750D040365}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{10F88EE1-C3B3-40A6-AEA1-72750D040365} = {8CCE6C22-0D23-4E1D-9F9A-10E96257B5EF}
 	EndGlobalSection
 EndGlobal
