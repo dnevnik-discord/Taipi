@@ -7,9 +7,10 @@ public class Article
     public int Id { get; set; }
     public string Title { get; set; }
     public Uri Uri { get; set; }
-    public ArticleType ?ArticleType { get; set; }
+    // ToDo: 
+    // public ArticleType ?ArticleType { get; set; }
+    public ArticleType? ArticleType { get; set; }
 
-    // ToDo: not really
     public Article(Uri uri)
     {
         throw new NotImplementedException();
