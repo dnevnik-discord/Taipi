@@ -20,6 +20,7 @@ public class DnevnikClient
     public async Task<string> GetArticleAsync(Uri uri) =>
         await _client.GetStringAsync(uri);
 
+    // ToDo: arguments/parameters or delete me
     public async Task<string> GetHttpbinAsync(string endpoint) =>
         await _client.GetStringAsync($"https://httpbin.org/{endpoint}");
 
@@ -45,7 +46,8 @@ public class DnevnikClient
             foreach (var node in nodes)
             {
                 var article = new Article(
-                    node.GetAttributeValue("title", "").Replace("&quot;", "\""),
+                    // ToDo: replace all(?) HTML entities & normalise URIs(elsewhere) -- strip trailing ?...s
+                    node.GetAttributeValue("title", "").Replace("&quot;", "\"").Replace("&amp;", "&"),
                     new Uri("https://www.dnevnik.bg" + node.GetAttributeValue("href", "")),
                     articleType
                 );

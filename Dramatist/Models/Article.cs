@@ -48,7 +48,7 @@ public class Article
         return $"Type: {ArticleType} | Title: {Title} | Uri: {Uri}";
     }
 
-    // from Article.Uri
+    // from article.Uri
     private string GetId()
     {
         throw new NotImplementedException();

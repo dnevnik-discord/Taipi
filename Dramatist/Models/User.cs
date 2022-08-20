@@ -7,6 +7,10 @@ public class User
     public string Nick { get; set; }
     public string Name { get; set; }
 
+    // <div class="user">
+	//  <div class="userHolder">
+	//    <div class="avatar"><a href="/selqnin" title="Към профила на selqnin"><img alt="selqnin" src="/img/man60.png"  /></a>
+	// 	    <a href="#" class="dropdown ">&nbsp;</a><ul name="users1134259-9305" class="lgrelations">
     public User()
     {
         throw new NotImplementedException();
