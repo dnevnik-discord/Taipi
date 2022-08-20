@@ -2,7 +2,6 @@ using Discord;
 using Discord.Addons.Hosting;
 using Discord.Commands;
 using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
 using Taipi.Services;
 
 // ToDo: FIX ME!
