@@ -15,6 +15,7 @@ public class DnevnikClient
         _client.BaseAddress = new Uri(Dnevnik.BaseAddress);
     }
 
+    // response.Headers.Location
     // ToDo: ensure success, try-catch
 
     public async Task<string> GetArticleAsync(Uri uri) =>
