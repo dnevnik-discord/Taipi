@@ -3,3 +3,5 @@
 **/TestResults/**
 .vscode/*
 notes
+Tests/DramatistTest/obj/DramatistTest.csproj.nuget.g.props
+Tests/DramatistTest/obj/DramatistTest.csproj.nuget.g.targets
