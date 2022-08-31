@@ -15,20 +15,20 @@ public class DnevnikClient
         _client.BaseAddress = new Uri(Dnevnik.BaseAddress);
     }
 
-    // response.Headers.Location
-    // ToDo: ensure success, try-catch
+    // ToDo: response.Headers.Location
 
+    // ToDo: use 'private async Task<string> GetStringAsync()'
     public async Task<string> GetArticleAsync(Uri uri) =>
         await _client.GetStringAsync(uri);
 
     // ToDo: arguments/parameters or delete me
     public async Task<string> GetHttpbinAsync(string endpoint) =>
-        await _client.GetStringAsync($"https://httpbin.org/{endpoint}");
+        await GetStringAsync($"https://httpbin.org/{endpoint}");
 
     public async Task<List<Article>> GetFrontPageArticlesAsync(ArticleType articleType)
     {
-        //   System.Net.Http.HttpRequestException: Response status code does not indicate success: 503 (Service Unavailabl
-        var response = await _client.GetStringAsync("/");
+        var response = await GetStringAsync();
+
         var doc = new HtmlDocument();
         doc.LoadHtml(response);
 
@@ -56,7 +56,30 @@ public class DnevnikClient
             }
         }
         
-
         return articles;
+    }
+
+    private async Task<string> GetStringAsync(string? path = "/")
+    {
+        var response = "";
+
+        try
+        {
+            response = await _client.GetStringAsync(path);
+        }
+        // System.Net.Http.HttpRequestException:
+        //      Response status code does not indicate success:
+        //      - 503 (Service Unavailable). -- usually Dnevnik
+        //      - 403 (Forbidden). -- usually CloudFlare
+        // ToDo: logging in 'Dramatist'?
+        // ToDo: throw here? handle and log in the caller,
+        // outside of 'Dramatist', not necessarily 'Taipi'
+        catch (HttpRequestException e)
+        {
+            Console.WriteLine("\nException Caught!");	
+            Console.WriteLine("Message :{0} ",e.Message);
+        }
+
+        return response;
     }
 }
