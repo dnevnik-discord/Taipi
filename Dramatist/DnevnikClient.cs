@@ -31,10 +31,10 @@ public class DnevnikClient
     {
         var articles = new List<Article>();
         
-        foreach (var type in (ArticleType[]) Enum.GetValues(typeof(ArticleType)))
-        {
+        // The cast to (ArticleType[]) is not necessary but it does make the code (marginally?) faster.
+        // foreach (var type in (ArticleType[]) Enum.GetValues(typeof(ArticleType)))
+        foreach (ArticleType type in Enum.GetValues(typeof(ArticleType)))
             articles.AddRange(await GetFrontPageArticlesAsync(type));
-        }
 
         return articles;
     }
