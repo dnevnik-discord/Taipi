@@ -9,6 +9,8 @@ public class DnevnikClient
 {
     private readonly HttpClient _client;
 
+    private static List<Article> FrontPageArticles;
+
     public DnevnikClient(HttpClient client)
     {
         _client = client;
@@ -25,6 +27,18 @@ public class DnevnikClient
     public async Task<string> GetHttpbinAsync(string endpoint) =>
         await GetStringAsync($"https://httpbin.org/{endpoint}");
 
+    public async Task<List<Article>> GetFrontPageArticlesAsync()
+    {
+        var articles = new List<Article>();
+        
+        foreach (var type in (ArticleType[]) Enum.GetValues(typeof(ArticleType)))
+        {
+            articles.AddRange(await GetFrontPageArticlesAsync(type));
+        }
+
+        return articles;
+    }
+    
     public async Task<List<Article>> GetFrontPageArticlesAsync(ArticleType articleType)
     {
         var response = await GetStringAsync();
