@@ -1,15 +1,25 @@
 namespace Dramatist.Models;
 
-
 public class Article
 {
     // ToDo: Id and DnevnikId?
     public int Id { get; set; }
     public string Title { get; set; }
     public Uri Uri { get; set; }
-    public ArticleType ?ArticleType { get; set; }
+    // ToDo: 
+    // public ArticleType ?ArticleType { get; set; }
+    public ArticleType? ArticleType { get; set; }
 
-    // ToDo: not really
+    public Article()
+    {
+        throw new NotImplementedException();
+    }
+    
+    public Article(int id)
+    {
+        throw new NotImplementedException();
+    }
+
     public Article(Uri uri)
     {
         throw new NotImplementedException();
@@ -38,7 +48,7 @@ public class Article
         return $"Type: {ArticleType} | Title: {Title} | Uri: {Uri}";
     }
 
-    // from Article.Uri
+    // from article.Uri
     private string GetId()
     {
         throw new NotImplementedException();

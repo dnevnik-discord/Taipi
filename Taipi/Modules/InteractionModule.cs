@@ -9,4 +9,11 @@ public class InteractionModule : InteractionModuleBase<SocketInteractionContext>
     {
         await RespondAsync(input);
     }
+
+    [SlashCommand("about", "About Taipi")]
+    public async Task About()
+    {
+        // ToDo: do not hardcode me
+        await RespondAsync("https://github.com/dnevnik-discord/Taipi");
+    }
 }

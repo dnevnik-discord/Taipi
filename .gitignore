@@ -1,5 +1,6 @@
-*/bin/*
-*/obj/*
+**/bin/**
+**/obj/**
+**/TestResults/**
 .vscode/*
-TestResults/*
 notes
+Tests/DramatistTest/obj/*
